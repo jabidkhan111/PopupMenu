@@ -1,0 +1,44 @@
+
+import com.jksurajpuriya.entryapp.databinding.ActivityMainBinding;
+
+public class MainActivity extends AppCompatActivity {
+
+    ActivityMainBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+
+       binding.gender.setOnClickListener(v -> {
+           openGenderPopup(v);
+       });
+    }
+
+    private void openGenderPopup(View v) {
+        PopupMenu menu =new PopupMenu(MainActivity.this,v);
+        menu.getMenuInflater().inflate(R.menu.gender_select,menu.getMenu());
+        
+        
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.male:
+                        binding.gender.setText("Male");
+                        break;
+                    case R.id.female:
+                        binding.gender.setText("Female");
+                }
+
+
+                return false;
+            }
+        });
+        menu.show();
+    }
+}
